@@ -1,6 +1,6 @@
 #  🎮📆​ NEXTDROP - SORTIES MENSUELLES DE JEUX VIDÉO 📆🎮
 
-![NextDrop Logo](./ChatGPT%20Image%2022%20juil.%202025%2C%2016_05_27.png)
+![NextDrop Logo](./asset/nestdroplogo.png)
 
 ## 🛠️ TECHNOS UTILISÉES
 

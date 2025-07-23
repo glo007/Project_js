@@ -15,3 +15,17 @@ function toggleMenu () {
    
 }
 toggleMenu();
+
+
+function changeTitle() {
+  const navbarLinks = document.querySelectorAll('.navbar__links a');
+  const platformTitle = document.querySelector('.platform-title');
+
+  navbarLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      platformTitle.textContent = link.textContent; 
+    });
+  });
+}
+changeTitle();

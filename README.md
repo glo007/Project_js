@@ -1,6 +1,6 @@
 #  🎮 NEXTDROP - SORTIES MENSUELLES DE JEUX VIDÉO 🎮
 
-<img width="1024" height="1024" alt="nestdroplogo" src="https://github.com/user-attachments/assets/f63d10bb-5236-47b9-946d-3346698103de" />
+<img width="500" height="900" alt="nestdroplogo" src="https://github.com/user-attachments/assets/f63d10bb-5236-47b9-946d-3346698103de" />
 
 ## 🛠️ TECHNOS UTILISÉES
 

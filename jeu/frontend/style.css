@@ -2,14 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Single+Day&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Single+Day&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-:root{
-    --bg_color: linear-gradient(to bottom right, #FF6B00, #FFC857)0;
-    --bg_color2: linear-gradient(to bottom right, #FFC857, #C6FF57);
-    --navbar-color: linear-gradient(to bottom right, #525671, #635271);
-    --color-Drop: linear-gradient(to bottom right, #6585FE, #AB65FE);
-    --h2_color: #A0A5B0; 
-    --text-color: white;
-    
+:root {
+  --bg_color: linear-gradient(to bottom right, #FF6B00, #FFC857);
+  --bg_color2: linear-gradient(to bottom right, #FFC857, #C6FF57);
+  --navbar-color: linear-gradient(to bottom right, #525671, #635271);
+  --color-Drop: linear-gradient(to bottom right, #6585FE, #AB65FE);
+  --h2_color: #A0A5B0;
+  --text-color: white;
+  --bgcolor: #1e1e1e;
 }
 
 * {
@@ -74,7 +74,7 @@ body {
 }
 
 h2 {
-        width: 60%;
+        width: 100%;
         margin: 2rem auto;
         margin-top: 5rem ;
         color: var(--h2_color);    
@@ -99,6 +99,7 @@ h2 {
     box-shadow: 0 .2rem .2rem black;
 }
 .barrecherche input {
+  width: 60%;
   flex: 1;
   padding: 0.6rem 1rem;
   font-size: 1rem;
@@ -194,8 +195,6 @@ figcaption time {
   color: #888;
 }
 
-
-
 footer {
   display:flex;
   align-items:center; 
@@ -223,9 +222,7 @@ footer {
   -webkit-text-fill-color: transparent;
   
 }
-
 }
-
 
 @media screen and (max-width:767.98px) {
   .navbar__links { 
@@ -364,4 +361,8 @@ main::before {
   pointer-events: none;
 }
 
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
 

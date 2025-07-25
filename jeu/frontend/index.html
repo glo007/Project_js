@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NextDrop</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
   <header>
-    <nav class="navbar dark-mode" role="navigation">
+    <nav class="navbar">
       <div class="navbar__logo">
         <h1 class="gradient-next">Next<strong class="gradient-drop">Drop</strong></h1>
       </div>
       <ul class="navbar__links">
-        <li class="navbar__link second"><a href="#">PlayStation</a></li>
-        <li class="navbar__link four"><a href="#">XBOX</a></li>
-        <li class="navbar__link three"><a href="#">Nintendo</a></li>
-        <li class="navbar__link one"><a href="#">PC</a></li>
+        <li class="navbar__link"><a href="#">PlayStation</a></li>
+        <li class="navbar__link"><a href="#">XBOX</a></li>
+        <li class="navbar__link"><a href="#">Nintendo</a></li>
+        <li class="navbar__link"><a href="#">PC</a></li>
       </ul>
       <button class="burger" aria-label="Menu">
         <span class="bar"></span>
@@ -27,16 +26,14 @@
     </nav>
   </header>
 
-  
-    <h2 class="platform-title">PlayStation</h2>
+  <h2 class="platform-title">PlayStation</h2>
 
-    <div class="barrecherche">
-  <input type="text" placeholder="Recherche du jeu..." />
-  <button type="submit">Search</button>
-    </div>
+  <div class="barrecherche">
+    <input type="text" placeholder="Recherche du jeu..." />
+    <button type="submit">Search</button>
+  </div>
 
-    <main>
-    <!-- Section des jeux -->
+  <main>
     <section>
       <ul>
         <li class="jeu">
@@ -44,152 +41,48 @@
             <div class="number" role="region" aria-labelledby="number_1">
               <strong id="number_1">1</strong>
             </div>
-
-            <img src="./asset/DS2.jpg" alt="Nom du jeu" />
-
-            <figcaption>
-              <h3>Nom du jeu</h3>
-              <p><time datetime="2004-09-10">10/09/2004</time></p>
+            <img src="./asset/DS2.jpg" alt="Death Stranding 2" class="project-img"/>
+            <figcaption class="project-info">
+              <h3>Death Stranding 2</h3>
+              <p><time datetime="2025-07-11">11/07/2025</time></p>
             </figcaption>
-
             <div class="project-jeu"
-              data-img="#"
-              data-desc="Description du jeu."
-              data-tech="Solo, Multi">
+              data-img="./asset/DS2.jpg"
+              data-title="Death Stranding 2"
+              data-desc="Une épopée post-apocalyptique où vous incarnez Sam Bridges. Traversez un monde fragmenté pour reconnecter l'humanité."
+              data-tech="SOLO,MULTI">
             </div>
           </figure>
         </li>
-
-        <li class="jeu">
-          <figure class="jeu1">
-            <div class="number" role="region" aria-labelledby="number_1">
-              <strong id="number_1">1</strong>
-            </div>
-
-            <img src="./asset/DS2.jpg" alt="Nom du jeu" />
-
-            <figcaption>
-              <h3>Nom du jeu</h3>
-              <p><time datetime="2004-09-10">10/09/2004</time></p>
-            </figcaption>
-
-            <div class="project-jeu"
-              data-img="#"
-              data-desc="Description du jeu."
-              data-tech="Solo, Multi">
-            </div>
-          </figure>
-        </li>
-
-        <li class="jeu">
-          <figure class="jeu1">
-            <div class="number" role="region" aria-labelledby="number_1">
-              <strong id="number_1">1</strong>
-            </div>
-
-            <img src="./asset/DS2.jpg" alt="Nom du jeu" />
-
-            <figcaption>
-              <h3>Nom du jeu</h3>
-              <p><time datetime="2004-09-10">10/09/2004</time></p>
-            </figcaption>
-
-            <div class="project-jeu"
-              data-img="#"
-              data-desc="Description du jeu."
-              data-tech="Solo, Multi">
-            </div>
-          </figure>
-        </li>
-
-        <li class="jeu">
-          <figure class="jeu1">
-            <div class="number" role="region" aria-labelledby="number_1">
-              <strong id="number_1">1</strong>
-            </div>
-
-            <img src="./asset/DS2.jpg" alt="Nom du jeu" />
-
-            <figcaption>
-              <h3>Nom du jeu</h3>
-              <p><time datetime="2004-09-10">10/09/2004</time></p>
-            </figcaption>
-
-            <div class="project-jeu"
-              data-img="#"
-              data-desc="Description du jeu."
-              data-tech="Solo, Multi">
-            </div>
-          </figure>
-        </li>
-
-        <li class="jeu">
-          <figure class="jeu1">
-            <div class="number" role="region" aria-labelledby="number_1">
-              <strong id="number_1">1</strong>
-            </div>
-
-            <img src="./asset/DS2.jpg" alt="Nom du jeu" />
-
-            <figcaption>
-              <h3>Nom du jeu</h3>
-              <p><time datetime="2004-09-10">10/09/2004</time></p>
-            </figcaption>
-
-            <div class="project-jeu"
-              data-img="#"
-              data-desc="Description du jeu."
-              data-tech="Solo, Multi">
-            </div>
-          </figure>
-        </li>
-
-        <li class="jeu">
-          <figure class="jeu1">
-            <div class="number" role="region" aria-labelledby="number_1">
-              <strong id="number_1">1</strong>
-            </div>
-
-            <img src="./asset/DS2.jpg" alt="Nom du jeu" />
-
-            <figcaption>
-              <h3>Nom du jeu</h3>
-              <p><time datetime="2004-09-10">10/09/2004</time></p>
-            </figcaption>
-
-            <div class="project-jeu"
-              data-img="#"
-              data-desc="Description du jeu."
-              data-tech="Solo, Multi">
-            </div>
-          </figure>
-        </li>
-
-
       </ul>
     </section>
   </main>
 
+  <!-- Modale -->
+  <div id="project-modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div class="modal-left">
+        <img id="modal-img" src="" alt="Aperçu du jeu" />
+      </div>
+      <div class="modal-right">
+        <h3 id="modal-title"></h3>
+        <p id="modal-desc"></p>
+        <div class="modal-tech" id="modal-tech"></div>
+      </div>
+    </div>
+  </div>
+
   <footer>
-    
-    <p><a href="#"><strong style="background: var(--bg_color2 );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;">Mention Legal</strong></a></p>
-
+    <p><a href="#"><strong style="background: var(--bg_color2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Mention Légale</strong></a></p>
     <p class="gradient-next">&copy; Next<strong class="gradient-drop">Drop</strong> - <time datetime="2025">2025</time></p>
-
     <div class="social-links">
-      <a href="#" class="social-link" aria-label="Github">
-        <img src="./asset/icons8-github.svg" alt="Github" />
-      </a>
-      <a href="#" class="social-link" aria-label="LinkedIn">
-        <img src="./asset/icons8-linkedin.svg" alt="LinkedIn" />
-      </a>
-      <a href="#" class="social-link" aria-label="Twitter">
-        <img src="./asset/icons8-twitter.svg" alt="Twitter" />
-      </a>
+      <a href="#" aria-label="Github"><img src="./asset/icons8-github.svg" alt="Github" /></a>
+      <a href="#" aria-label="LinkedIn"><img src="./asset/icons8-linkedin.svg" alt="LinkedIn" /></a>
+      <a href="#" aria-label="Twitter"><img src="./asset/icons8-twitter.svg" alt="Twitter" /></a>
     </div>
   </footer>
+
+  <script src="./app.js"></script>
 </body>
 </html>
-<script src="./app.js"></script>

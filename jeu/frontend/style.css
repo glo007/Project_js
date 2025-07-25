@@ -2,14 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Single+Day&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Single+Day&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-:root{
-    --bg_color: linear-gradient(to bottom right, #FF6B00, #FFC857)0;
-    --bg_color2: linear-gradient(to bottom right, #FFC857, #C6FF57);
-    --navbar-color: linear-gradient(to bottom right, #525671, #635271);
-    --color-Drop: linear-gradient(to bottom right, #6585FE, #AB65FE);
-    --h2_color: #A0A5B0; 
-    --text-color: white;
-    
+:root {
+  --bg_color: linear-gradient(to bottom right, #FF6B00, #FFC857);
+  --bg_color2: linear-gradient(to bottom right, #FFC857, #C6FF57);
+  --navbar-color: linear-gradient(to bottom right, #525671, #635271);
+  --color-Drop: linear-gradient(to bottom right, #6585FE, #AB65FE);
+  --h2_color: #A0A5B0;
+  --text-color: white;
+  --bgcolor: #1e1e1e;
 }
 
 * {
@@ -74,7 +74,7 @@ body {
 }
 
 h2 {
-        width: 60%;
+        width: 100%;
         margin: 2rem auto;
         margin-top: 5rem ;
         color: var(--h2_color);    
@@ -99,6 +99,7 @@ h2 {
     box-shadow: 0 .2rem .2rem black;
 }
 .barrecherche input {
+  width: 60%;
   flex: 1;
   padding: 0.6rem 1rem;
   font-size: 1rem;
@@ -194,8 +195,6 @@ figcaption time {
   color: #888;
 }
 
-
-
 footer {
   display:flex;
   align-items:center; 
@@ -223,7 +222,119 @@ footer {
   -webkit-text-fill-color: transparent;
   
 }
+
+
 }
+
+.social-links img {
+  width: 2rem;
+  height: 2rem;
+    
+}
+
+/* --- MODAL STYLE --- */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: var(--bgcolor);
+  padding: 2.5rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 0 40px #000a;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-start;
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  color: var(--text-color);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 2.5rem;
+  color: var(--text-color);
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 2;
+}
+.modal-close:hover {
+  color: red;
+}
+
+.modal-left {
+  flex: 1;
+}
+.modal-right {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#modal-img {
+  width: 100%;
+  max-width: 30rem;
+  border-radius: 0.7rem;
+  box-shadow: 0 0 2.4rem #0007;
+  object-fit: cover;
+  background: #fff;
+}
+
+
+#modal-title {
+  font-size: 1.7rem;
+  margin: 0;
+  font-family: 'Anton', sans-serif; ;
+}
+#modal-desc {
+  font-size: .79rem;
+  font-family: 'Cousine';
+  line-height: 1.6;
+}
+
+#modal-tech {
+  display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+    
+}
+
+#modal-tech img {
+  width: 44px;
+    height: 44px;
+    background: var(--bg_color2);
+    border: .1rem solid #fff;
+    border-radius: 0.5rem;
+    padding: 0.3rem;
+    box-shadow: 0 2px 8px #0003;
+}
+.modal-tech img:hover {
+    transform: scale(1.15) ;
+    transition: transform 0.3s ease;
+
+}
+  
+
+
+
+
+
+
 
 @media screen and (max-width:767.98px) {
   .navbar__links { 
@@ -362,4 +473,8 @@ main::before {
   pointer-events: none;
 }
 
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
 

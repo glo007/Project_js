@@ -226,14 +226,27 @@ footer .gradient-mention {
   
 }
 
-
+.social-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .social-links h4 {
+  font-size: 1.2rem;
+}
+}
 
 
 .social-links img {
   width: 2rem;
   height: 2rem;
   margin: 0 0.5rem;
-    
+  transition: transform 0.3s ease;
+  cursor: pointer;
+
+}
+.social-links img:hover {
+  transform: scale(1.2);
 }
 
 /* --- MODAL STYLE --- */

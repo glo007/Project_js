@@ -1,3 +1,7 @@
+// Base de l'API backend (proxy RAWG + favoris).
+// La clé RAWG vit désormais côté serveur, plus dans le navigateur.
+const API_BASE = 'http://localhost:3000/api';
+
 // Menu burger
 function toggleMenu() {
   const navbar = document.querySelector('.navbar');
@@ -40,27 +44,34 @@ const techLogos = {
   playstation: './asset/playstation.svg',
 };
 
-// Fonctions API RAWG
-const apiKey = '637c061e6c0b4d3da8d4c60d0fc0e466';
-const baseUrl = 'https://api.rawg.io/api/games';
-
 const searchInput = document.querySelector('.barrecherche input');
 const searchBtn = document.querySelector('.barrecherche button');
 const gameList = document.querySelector('main section ul');
 const navbarLinks = document.querySelectorAll('.navbar__links a');
 
-// Chargement initial des jeux du mois
-window.addEventListener('DOMContentLoaded', async () => {// Chargement des jeux du mois
-  const games = await fetchGames({});// Requête sans filtre pour obtenir les jeux du mois
-  displayGames(games);// Affichage des jeux dans la liste
+// Identifiants des jeux favoris (chargés depuis le backend).
+let favoriteIds = new Set();
+
+// Chargement initial : favoris puis jeux du mois.
+window.addEventListener('DOMContentLoaded', async () => {
+  await loadFavorites();
+  const games = await fetchGames({});
+  displayGames(games);
 });
 
-// Filtrage par plateforme
+// Filtrage par plateforme / accès aux favoris
 navbarLinks.forEach(link => {
   link.addEventListener('click', async (e) => {
     e.preventDefault();
-    const platform = link.textContent.trim().toLowerCase();
-    const platformId = getPlatformId(platform);
+    const label = link.textContent.trim().toLowerCase();
+
+    if (label === 'favoris') {
+      const favorites = await fetchFavorites();
+      displayGames(favorites);
+      return;
+    }
+
+    const platformId = getPlatformId(label);
     if (platformId) {
       const games = await fetchGames({ platforms: platformId });
       displayGames(games);
@@ -74,21 +85,18 @@ searchBtn.addEventListener('click', async () => {
   if (query.length < 2) return;
   const games = await fetchGames({ search: query });
   displayGames(games);
-  searchInput.value = ''; 
+  searchInput.value = '';
+});
 
-// Validation de la recherche avec la touche enter
+// Validation de la recherche avec la touche Entrée
 searchInput.addEventListener('keydown', async (e) => {
   if (e.key === 'Enter') {
     const query = searchInput.value.trim();
     if (query.length < 2) return;
     const games = await fetchGames({ search: query });
     displayGames(games);
-    searchInput.value = ''; // Réinitialiser le champ après validation
+    searchInput.value = '';
   }
-});
-
-
-  
 });
 
 // Recherche automatique dès 2 caractères (sans reset ici)
@@ -111,35 +119,61 @@ function getPlatformId(name) {
   return platforms[name.toLowerCase()];
 }
 
-// Requête vers l'API pour récupérer les jeux
+// Requête vers le backend pour récupérer les jeux
 async function fetchGames({ search = '', platforms = '' }) {
-  const now = new Date();
-  const startDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-01`;
-  const endDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-31`;
+  const params = new URLSearchParams();
+  if (search) params.set('search', search);
+  if (platforms) params.set('platforms', platforms);
 
-  const url = `${baseUrl}?key=${apiKey}&dates=${startDate},${endDate}&ordering=released&page_size=10${
-    search ? `&search=${encodeURIComponent(search)}` : ''
-  }${platforms ? `&platforms=${platforms}` : ''}`;
-
-  const response = await fetch(url);
-  const data = await response.json();
-
-  const detailedGames = await Promise.all(
-    data.results.map(async game => {
-      try {
-        const res = await fetch(`${baseUrl}/${game.id}?key=${apiKey}&locale=fr`);
-        const detail = await res.json();
-        return { ...game, description_raw: detail.description_raw };
-      } catch {
-        return game;
-      }
-    })
-  );
-
-  return detailedGames;
+  try {
+    const response = await fetch(`${API_BASE}/games?${params.toString()}`);
+    if (!response.ok) return [];
+    const games = await response.json();
+    return Array.isArray(games) ? games : [];
+  } catch {
+    return [];
+  }
 }
 
-// Blocage des jeux de cul mystiques
+// --- Favoris -----------------------------------------------------------
+
+async function loadFavorites() {
+  const favorites = await fetchFavorites();
+  favoriteIds = new Set(favorites.map(fav => String(fav.id)));
+}
+
+async function fetchFavorites() {
+  try {
+    const response = await fetch(`${API_BASE}/favorites`);
+    if (!response.ok) return [];
+    const favorites = await response.json();
+    return Array.isArray(favorites) ? favorites : [];
+  } catch {
+    return [];
+  }
+}
+
+async function addFavorite(game) {
+  const response = await fetch(`${API_BASE}/favorites`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(game),
+  });
+  if (response.ok || response.status === 409) {
+    favoriteIds.add(String(game.id));
+  }
+}
+
+async function removeFavorite(id) {
+  const response = await fetch(`${API_BASE}/favorites/${id}`, { method: 'DELETE' });
+  if (response.ok || response.status === 404) {
+    favoriteIds.delete(String(id));
+  }
+}
+
+// --- Affichage ---------------------------------------------------------
+
+// Blocage des contenus à caractère sexuel (double sécurité avec le backend).
 function isSexualContent(game) {
   const sexualKeywords = ['sexual', 'sex', 'nudity', 'erotic', 'hentai', 'porn', 'nsfw', 'ecchi', 'adult', 'mature'];
 
@@ -152,6 +186,31 @@ function isSexualContent(game) {
   `.toLowerCase();
 
   return sexualKeywords.some(keyword => allText.includes(keyword));
+}
+
+// Badge note communautaire + Metacritic
+function buildMeta(game) {
+  const parts = [];
+
+  if (game.rating) {
+    parts.push(`<span class="card-rating">★ ${Number(game.rating).toFixed(1)}</span>`);
+  }
+
+  if (game.metacritic) {
+    const m = Number(game.metacritic);
+    const level = m >= 75 ? '' : m >= 50 ? ' is-mid' : ' is-low';
+    parts.push(`<span class="card-metacritic${level}">MC ${m}</span>`);
+  }
+
+  return parts.length ? `<div class="card-meta">${parts.join('')}</div>` : '';
+}
+
+// Pastilles de genres (max 3)
+function buildGenres(game) {
+  const genres = (game.genres || []).slice(0, 3);
+  if (genres.length === 0) return '';
+  const pills = genres.map(g => `<span class="genre-pill">${g.name}</span>`).join('');
+  return `<div class="card-genres">${pills}</div>`;
 }
 
 // Affichage des jeux dans la liste HTML
@@ -170,20 +229,29 @@ function displayGames(games) {
     li.classList.add('jeu');
 
     const figure = document.createElement('figure');
-    figure.classList.add(`jeu${index + 1}`);
+    figure.classList.add(`jeu${index + 1}`, 'jeu-card');
 
     const number = `<div class="number" role="region" aria-labelledby="number_${index + 1}">
                       <strong id="number_${index + 1}">${index + 1}</strong>
                     </div>`;
 
+    const isFav = favoriteIds.has(String(game.id));
+    const favBtn = `<button type="button" class="fav-btn${isFav ? ' is-fav' : ''}"
+                      data-id="${game.id}"
+                      aria-label="Ajouter aux favoris"
+                      aria-pressed="${isFav}">${isFav ? '★' : '☆'}</button>`;
+
     const image = `<img src="${game.background_image}" alt="${game.name}" class="project-img"/>`;
 
     const caption = `<figcaption class="project-info">
                       <h3>${game.name}</h3>
-                      <p><time datetime="${game.released}">${new Date(game.released).toLocaleDateString('fr-FR')}</time></p>
+                      <p><time datetime="${game.released}">${game.released ? new Date(game.released).toLocaleDateString('fr-FR') : ''}</time></p>
+                      ${buildMeta(game)}
                     </figcaption>`;
 
-    const tech = game.tags.some(t => t.name.toLowerCase().includes('multiplayer')) ? 'MULTI' : 'SOLO';
+    const genres = buildGenres(game);
+
+    const tech = (game.tags || []).some(t => t.name.toLowerCase().includes('multiplayer')) ? 'MULTI' : 'SOLO';
 
     const desc = game.description_raw ? game.description_raw : 'Description non disponible ici. ';
 
@@ -197,15 +265,48 @@ function displayGames(games) {
                       data-platforms="${platforms}">
                     </div>`;
 
-    figure.innerHTML = number + image + caption + dataDiv;
+    figure.innerHTML = number + favBtn + image + caption + genres + dataDiv;
+
+    // Données minimales pour enregistrer le favori.
+    const btn = figure.querySelector('.fav-btn');
+    btn._game = {
+      id: game.id,
+      name: game.name,
+      background_image: game.background_image,
+      released: game.released,
+    };
+
     li.appendChild(figure);
     gameList.appendChild(li);
   });
 
+  attachFavoriteEvents();
   attachModalEvents(); // Lier les jeux à la modale
 }
 
-// Gérer l’ouverture de la modale
+// Gérer le clic sur le bouton favori
+function attachFavoriteEvents() {
+  document.querySelectorAll('.fav-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation(); // ne pas ouvrir la modale
+      const id = btn.dataset.id;
+      const active = favoriteIds.has(String(id));
+
+      if (active) {
+        await removeFavorite(id);
+      } else {
+        await addFavorite(btn._game);
+      }
+
+      const nowFav = favoriteIds.has(String(id));
+      btn.classList.toggle('is-fav', nowFav);
+      btn.setAttribute('aria-pressed', String(nowFav));
+      btn.textContent = nowFav ? '★' : '☆';
+    });
+  });
+}
+
+// Gérer l'ouverture de la modale
 function attachModalEvents() {
   document.querySelectorAll('.jeu').forEach(jeuEl => {
     jeuEl.addEventListener('click', () => {
@@ -225,7 +326,7 @@ function attachModalEvents() {
       const techsDiv = document.getElementById('modal-tech');
       techsDiv.innerHTML = '';
 
-      // Type SOLOou MULTI
+      // Type SOLO ou MULTI
       tech.forEach(t => {
         const key = t.trim().toLowerCase();
         if (techLogos[key]) {
@@ -237,7 +338,7 @@ function attachModalEvents() {
         }
       });
 
-      // types de Plateformes
+      // Types de plateformes
       platforms.forEach(p => {
         const key = p.trim().toLowerCase();
         if (techLogos[key]) {
@@ -266,4 +367,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-

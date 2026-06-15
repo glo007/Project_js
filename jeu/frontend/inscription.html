@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NextDrop — Inscription</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="navbar__logo">
+        <h1 class="gradient-next">Next<strong class="gradient-drop">Drop</strong></h1>
+      </div>
+      <ul class="navbar__links">
+        <li class="navbar__link"><a href="./index.html">Accueil</a></li>
+        <li class="navbar__link"><a href="./communaute.html">Communauté</a></li>
+      </ul>
+      <button class="burger" aria-label="Menu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+    </nav>
+  </header>
+
+  <h2 class="platform-title">Inscription</h2>
+
+  <main class="form-page">
+    <form id="register-form" class="card-form">
+      <input type="text" name="pseudo" placeholder="Pseudo" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="password" name="mot_de_passe" placeholder="Mot de passe (min. 6 caractères)" required />
+      <button type="submit">Créer mon compte</button>
+      <p class="form-msg" id="register-msg"></p>
+      <p class="hint">Déjà inscrit ? <a class="link" href="./connexion.html">Connectez-vous</a></p>
+    </form>
+  </main>
+
+  <footer>
+    <p class="gradient-next">&copy; Next<strong class="gradient-drop">Drop</strong> - <time datetime="2025">2025</time></p>
+  </footer>
+
+  <script src="./community-core.js"></script>
+  <script src="./inscription.js"></script>
+</body>
+</html>

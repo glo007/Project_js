@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NextDrop — Détail du jeu</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="navbar__logo">
+        <h1 class="gradient-next">Next<strong class="gradient-drop">Drop</strong></h1>
+      </div>
+      <ul class="navbar__links">
+        <li class="navbar__link"><a href="./index.html">Accueil</a></li>
+        <li class="navbar__link"><a href="./communaute.html">Communauté</a></li>
+      </ul>
+      <button class="burger" aria-label="Menu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="detail-page">
+    <p><a class="link" href="./communaute.html">← Retour à la communauté</a></p>
+
+    <article id="game-detail" class="panel game-detail">
+      <p>Chargement…</p>
+    </article>
+
+    <section class="panel comments-panel">
+      <h3 class="comments-title">Commentaires</h3>
+      <ul id="comments" class="comments-list"></ul>
+
+      <form id="comment-form" class="comment-form" hidden>
+        <textarea name="contenu" placeholder="Votre commentaire..." rows="3" required></textarea>
+        <button type="submit">Commenter</button>
+        <p class="form-msg" id="comment-msg"></p>
+      </form>
+      <p id="comment-hint" class="hint"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p class="gradient-next">&copy; Next<strong class="gradient-drop">Drop</strong> - <time datetime="2025">2025</time></p>
+  </footer>
+
+  <script src="./community-core.js"></script>
+  <script src="./jeu.js"></script>
+</body>
+</html>

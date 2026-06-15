@@ -675,3 +675,297 @@ main::before {
     width: 100%;
   }
 }
+
+/* ======================================================
+   Page Communauté : auth, formulaires, commentaires
+   ====================================================== */
+.section-title {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--neon-cyan);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 0.8rem rgba(34, 211, 238, 0.35);
+}
+
+.auth-zone {
+  width: min(90%, 60rem);
+  margin: 1rem auto 0;
+}
+.auth-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.5rem;
+}
+.welcome {
+  text-align: center;
+  font-family: 'Space Mono', monospace;
+  color: var(--text-muted);
+}
+.welcome strong {
+  color: var(--accent-amber);
+}
+
+/* Formulaires en panneau verre */
+.card-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1.5rem;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: 1rem;
+  backdrop-filter: blur(6px);
+}
+.card-form input,
+.card-form textarea {
+  padding: 0.7rem 1rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border-soft);
+  border-radius: 0.5rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  resize: vertical;
+}
+.card-form input::placeholder,
+.card-form textarea::placeholder {
+  color: var(--text-muted);
+}
+.card-form input:focus,
+.card-form textarea:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 0.7rem rgba(34, 211, 238, 0.4);
+}
+.card-form button {
+  padding: 0.7rem 1.4rem;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #07070f;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-violet));
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 1rem rgba(168, 85, 247, 0.55);
+}
+.file-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.form-msg {
+  font-size: 0.8rem;
+  color: var(--neon-pink);
+  min-height: 1rem;
+  margin: 0;
+}
+.hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.add-game-section {
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+/* Carte sans image */
+.project-img.no-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Modale détail communauté */
+.modal-community {
+  max-width: 46rem;
+  width: 90vw;
+}
+.gm-author {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin: 0;
+}
+#gm-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #cfd2e6;
+}
+.comments-title {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--neon-violet);
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--border-soft);
+  padding-top: 1rem;
+}
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  max-height: 16rem;
+  overflow-y: auto;
+}
+.comment {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-soft);
+  border-radius: 0.6rem;
+  padding: 0.6rem 0.8rem;
+}
+.comment-author {
+  font-weight: 700;
+  color: var(--accent-amber);
+  font-size: 0.85rem;
+}
+.comment-date {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-left: 0.5rem;
+}
+.comment-body {
+  margin: 0.3rem 0 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #d7dae8;
+  word-break: break-word;
+}
+.comment-empty {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+.comment-form textarea {
+  padding: 0.6rem 0.8rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text-color);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border-soft);
+  border-radius: 0.5rem;
+  resize: vertical;
+}
+.comment-form textarea:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 0.6rem rgba(34, 211, 238, 0.35);
+}
+.comment-form button {
+  align-self: flex-start;
+  padding: 0.5rem 1.2rem;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #07070f;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-violet));
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+/* ----- Pages distinctes (connexion, inscription, ajout, détail) ----- */
+.form-page {
+  width: min(92%, 32rem);
+  margin: 1rem auto 4rem;
+}
+
+.detail-page {
+  width: min(92%, 50rem);
+  margin: 1.5rem auto 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(6px);
+}
+
+.link {
+  color: var(--neon-cyan);
+  text-decoration: none;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Carte de la liste : l'enveloppe <a> ne doit pas ressembler à un lien */
+.jeu-link {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Fiche détail d'un jeu */
+.game-detail {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+.detail-img {
+  width: 16rem;
+  max-width: 42%;
+  border-radius: 0.8rem;
+  object-fit: cover;
+}
+.detail-img.no-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  height: 11rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+.detail-body {
+  flex: 1;
+}
+.detail-title {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--neon-cyan);
+  font-size: 1.6rem;
+  text-shadow: 0 0 1rem rgba(34, 211, 238, 0.35);
+}
+.detail-desc {
+  margin-top: 0.8rem;
+  line-height: 1.7;
+  color: #cfd2e6;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+@media screen and (max-width: 600px) {
+  .game-detail {
+    flex-direction: column;
+  }
+  .detail-img {
+    width: 100%;
+    max-width: 100%;
+  }
+}
